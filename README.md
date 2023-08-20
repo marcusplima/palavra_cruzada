@@ -1,6 +1,9 @@
 # palavra_cruzada
 
 Aplicação para resolver palavra cruzada
-crossword solver
+
+Crossword solver
+
 Kreuzworträtsel lösen
+
 Solucionar crucigramas
