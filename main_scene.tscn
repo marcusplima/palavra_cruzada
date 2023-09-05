@@ -1,0 +1,122 @@
+[gd_scene load_steps=15 format=3 uid="uid://dyuyxer6fxudf"]
+
+[ext_resource type="Script" path="res://Itemlist_words.gd" id="1_84222"]
+[ext_resource type="Script" path="res://Button_add_word.gd" id="1_m8ufl"]
+[ext_resource type="Script" path="res://main_scene.gd" id="1_srxfc"]
+[ext_resource type="Script" path="res://Button_del_word.gd" id="4_yq06j"]
+[ext_resource type="FontFile" uid="uid://cj81oxpv6ufnl" path="res://Courier New.ttf" id="5_lqxiy"]
+[ext_resource type="Script" path="res://Label_letter.gd" id="5_uc1rj"]
+[ext_resource type="AudioStream" uid="uid://ulg5akecaumr" path="res://beep-6-96243.mp3" id="6_y3npt"]
+[ext_resource type="AudioStream" uid="uid://ca58bc51eg7b5" path="res://negative_beeps-6008.mp3" id="7_r48hi"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="10_gmkki"]
+[ext_resource type="Texture2D" uid="uid://13adem6t126a" path="res://pin.svg" id="10_urt2w"]
+[ext_resource type="Texture2D" uid="uid://7mckpgwtgx5o" path="res://check_icon.svg" id="11_6xl8p"]
+[ext_resource type="Texture2D" uid="uid://bcm0mesu6ld3o" path="res://x_icon.svg" id="13_2rv88"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n76w"]
+
+[sub_resource type="Theme" id="Theme_2mjpq"]
+
+[node name="Node2D_main" type="Node2D"]
+script = ExtResource("1_srxfc")
+
+[node name="Itemlist_words" type="ItemList" parent="."]
+offset_top = 32.0
+offset_right = 368.0
+offset_bottom = 192.0
+fixed_icon_size = Vector2i(25, 25)
+script = ExtResource("1_84222")
+
+[node name="LineEdit_new_word" type="LineEdit" parent="."]
+unique_name_in_owner = true
+offset_top = -1.0
+offset_right = 368.0
+offset_bottom = 30.0
+placeholder_text = "Nova palavra"
+
+[node name="Button_add_word" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 376.0
+offset_right = 405.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0.87451, 0, 1)
+text = "+"
+script = ExtResource("1_m8ufl")
+
+[node name="Button_del_word" type="Button" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5n76w")
+offset_left = 376.0
+offset_top = 36.0
+offset_right = 405.0
+offset_bottom = 68.0
+theme = SubResource("Theme_2mjpq")
+theme_override_colors/font_color = Color(0.988235, 0, 0, 1)
+text = "-"
+script = ExtResource("4_yq06j")
+
+[node name="TextEdit_letters" type="TextEdit" parent="."]
+unique_name_in_owner = true
+offset_left = 464.0
+offset_right = 1144.0
+offset_bottom = 192.0
+theme_override_colors/background_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_lqxiy")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "LINHAS"
+
+[node name="Label_letter" type="Label" parent="." groups=["labels_group"]]
+unique_name_in_owner = true
+offset_right = 26.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+script = ExtResource("5_uc1rj")
+
+[node name="Marker2D" type="Marker2D" parent="Label_letter"]
+unique_name_in_owner = true
+position = Vector2(13, 13)
+
+[node name="Line2D" type="Line2D" parent="." groups=["lines"]]
+unique_name_in_owner = true
+show_behind_parent = true
+width = 15.0
+default_color = Color(0.0666667, 1, 0.0196078, 0.588235)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="check_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_y3npt")
+
+[node name="not_found_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_r48hi")
+
+[node name="CheckButton_lines_on" type="CheckButton" parent="."]
+unique_name_in_owner = true
+offset_left = 376.0
+offset_top = 64.0
+offset_right = 457.0
+offset_bottom = 109.0
+icon = ExtResource("10_urt2w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(560, 304)
+script = ExtResource("10_gmkki")
+
+[node name="CheckIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-216, 160)
+texture = ExtResource("11_6xl8p")
+
+[node name="XIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-208, 288)
+texture = ExtResource("13_2rv88")
+
+[connection signal="item_selected" from="Itemlist_words" to="." method="_on_itemlist_words_item_selected"]
+[connection signal="pressed" from="Button_add_word" to="Button_add_word" method="_on_pressed"]
+[connection signal="pressed" from="Button_del_word" to="Button_del_word" method="_on_pressed"]
+[connection signal="text_changed" from="TextEdit_letters" to="." method="_on_text_edit_letters_text_changed"]
+[connection signal="text_changed" from="TextEdit_letters" to="TextEdit_letters" method="_on_text_changed"]

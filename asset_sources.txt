@@ -1,0 +1,9 @@
+sounds:
+https://pixabay.com/sound-effects/negative-beeps-6008/
+https://pixabay.com/sound-effects/beep-6-96243/
+
+fonts:
+https://www.freefonts.io/downloads/courier-new/#google_vignette
+
+icon tool:
+https://easyappicon.com/
